@@ -1,0 +1,152 @@
+# OnaPilates - Règles du Projet
+
+## Contexte du Projet
+OnaPilates est une boutique e-commerce Shopify spécialisée dans la vente de Reformers de Pilates pour studios à domicile. Le projet utilise un thème Shopify personnalisé avec Tailwind CSS.
+
+## Nom de la Marque
+⚠️ **IMPORTANT** : Le nom de la marque est **OnaPilates** (avec un "s" à la fin), jamais "OnaPilate".
+
+## Structure du Projet
+
+### Dossiers Shopify
+- `layout/` - Layouts Liquid (theme.liquid)
+- `templates/` - Templates de pages (index.liquid, product.liquid)
+- `sections/` - Sections réutilisables Liquid
+- `snippets/` - Snippets réutilisables
+- `assets/` - CSS, JS, images
+- `config/` - Configuration du thème (settings_schema.json)
+
+### Technologies
+- **Shopify Liquid** - Template language
+- **Tailwind CSS** - Framework CSS (via CDN)
+- **JavaScript Vanilla** - Pas de framework JS
+- **Animations CSS** - Keyframes personnalisées
+
+## Conventions de Code
+
+### Liquid
+- Utiliser `{{ }}` pour les variables
+- Utiliser `{% %}` pour les tags
+- Toujours fermer les tags Liquid
+- Utiliser `section.settings` pour les paramètres de section
+- Utiliser `settings.` pour les paramètres globaux du thème
+
+### CSS
+- Utiliser les classes Tailwind en priorité
+- Classes personnalisées dans `assets/theme.css`
+- Variables CSS dans `snippets/dynamic-styles.liquid`
+- Animations : fadeInUp, slideInLeft, slideInRight, scaleIn, float, pulse-glow
+
+### JavaScript
+- Code dans `assets/theme.js`
+- Fonctions globales pour les carousels
+- localStorage pour la persistance (popup email)
+- Pas de dépendances externes
+
+## Couleurs du Thème
+- Primaire : #f8b4d9 (rose pastel)
+- Secondaire : #d8b4f8 (violet pastel)
+- Texte : #1f2937 (gris foncé)
+- Fond : #ffffff (blanc)
+- Fond alternatif : #f9fafb (gris très clair)
+
+## Navigation
+La navbar doit contenir :
+- Logo : OnaPilates (lien vers accueil)
+- Accueil
+- Produit
+- Catalogue (optionnel, configurable)
+- Contact (optionnel, configurable)
+- Bouton "Acheter" (lien vers panier)
+
+## Routes Shopify
+- Accueil : `{{ routes.root_url }}` ou `/`
+- Produit : `/products/[handle]`
+- Panier : `{{ routes.cart_url }}` ou `/cart`
+- Checkout : Automatique (pas de page personnalisée)
+
+## Sections Principales
+
+### Page d'Accueil
+1. Hero
+2. Why Choose Us
+3. Advantages
+4. Statistics
+5. Gallery (carousel)
+6. Email Subscription
+7. CTA Final
+
+### Page Produit
+1. Product Hero (carousel images)
+2. Product Gallery
+3. Product Features
+4. Product Specifications
+5. Product Testimonials
+6. Email Subscription
+7. CTA Final
+
+## Paramètres du Thème
+Tous les paramètres sont dans `config/settings_schema.json` :
+- Couleurs (primaire, secondaire, texte, fond)
+- Typographie (polices, tailles)
+- Espacements
+- Navigation
+- Boutons
+- Animations
+- Carousels
+- Popup Email
+- Footer
+- Responsive
+
+## Responsive
+- Mobile : < 768px
+- Desktop : >= 768px
+- Utiliser les classes Tailwind `md:` pour le responsive
+
+## Animations
+- Toujours vérifier `settings.enable_animations` avant d'appliquer
+- Utiliser les classes d'animation : `animate-fade-in-up`, `animate-slide-in-left`, etc.
+- Délais : `delay-100`, `delay-200`, etc.
+
+## Carousels
+- Auto-slide toutes les 4 secondes (configurable)
+- Navigation avec flèches et points
+- Fonctions dans `assets/theme.js` : `initGalleryCarousel()`, `initProductCarousel()`
+
+## Email Subscription
+- Popup au scroll (30% de la page)
+- Section dédiée sur les pages
+- localStorage pour éviter les doublons
+- Code promo : -10%
+
+## Bonnes Pratiques
+
+### Liquid
+- Toujours vérifier si une variable existe avant de l'utiliser
+- Utiliser `{% if %}` pour les conditions
+- Utiliser `{% for %}` pour les boucles
+- Utiliser `{{ block.shopify_attributes }}` dans les blocks
+
+### Performance
+- Images : utiliser `img_url` avec des tailles appropriées
+- CSS : minifier en production
+- JS : utiliser `defer` pour les scripts
+
+### Accessibilité
+- Utiliser les balises sémantiques HTML5
+- Ajouter des `alt` aux images
+- Utiliser `aria-label` si nécessaire
+
+## Fichiers à Ne Pas Modifier
+- `config.yml` - Généré automatiquement par Shopify
+- `.gitignore` - Configuration Git
+
+## Notes Importantes
+- Shopify n'utilise PAS de page de paiement personnalisée
+- Le checkout est géré automatiquement par Shopify
+- Les images doivent être uploadées dans Shopify (Contenu > Fichiers)
+- Les produits doivent être créés dans Shopify pour que les templates fonctionnent
+
+## Commandes Utiles
+- Créer un ZIP pour Shopify : Exclure `node_modules`, `.git`, fichiers HTML originaux
+- Structure minimale : `layout/`, `templates/`, `sections/`, `snippets/`, `assets/`, `config/`
