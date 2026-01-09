@@ -1,3 +1,10 @@
+{% assign main_product = all_products[settings.main_product] %}
+{% if main_product == blank and collections.all.products.first %}
+  {% assign main_product = collections.all.products.first %}
+{% endif %}
+{% assign primary_cta_url = section.settings.cta_url_1 | default: main_product.url %}
+{% assign secondary_cta_url = section.settings.cta_url_2 | default: main_product.url %}
+
 <section class="py-20 px-6 bg-gradient-to-br from-pink-50 via-purple-50 to-gray-50 relative overflow-hidden">
     <div class="absolute inset-0 overflow-hidden">
         <div class="absolute top-10 right-10 w-64 h-64 bg-pink-200/30 rounded-full blur-3xl animate-float"></div>
@@ -19,16 +26,16 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-scale-in delay-400">
-                {% if section.settings.cta_url_1 != blank %}
-                <a href="{{ section.settings.cta_url_1 }}" class="group px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-lg hover:scale-105 transition-all duration-300 shadow-lg flex items-center gap-2">
+                {% if primary_cta_url != blank %}
+                <a href="{{ primary_cta_url }}" class="group px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-lg hover:scale-105 transition-all duration-300 shadow-lg flex items-center gap-2">
                     <span>{{ section.settings.cta_text_1 }}</span>
                     <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>
                 </a>
                 {% endif %}
-                {% if section.settings.cta_url_2 != blank %}
-                <a href="{{ section.settings.cta_url_2 }}" class="px-8 py-4 glass-effect rounded-full text-gray-800 font-bold text-lg hover:bg-pink-50 transition-all duration-300 border-2 border-pink-300">
+                {% if secondary_cta_url != blank %}
+                <a href="{{ secondary_cta_url }}" class="px-8 py-4 glass-effect rounded-full text-gray-800 font-bold text-lg hover:bg-pink-50 transition-all duration-300 border-2 border-pink-300">
                     {{ section.settings.cta_text_2 }}
                 </a>
                 {% endif %}

@@ -1,0 +1,209 @@
+{% assign featured_product = all_products[section.settings.product] %}
+{% if featured_product == blank %}
+  {% assign featured_product = all_products[settings.main_product] %}
+{% endif %}
+{% if featured_product == blank and collections.all.products.first %}
+  {% assign featured_product = collections.all.products.first %}
+{% endif %}
+
+{% if featured_product != blank %}
+<section id="{{ section.settings.anchor_id | default: section.id }}" class="py-20 px-6 bg-white">
+    <div class="container mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="relative animate-scale-in delay-200">
+                <div class="absolute -top-6 -left-6 w-32 h-32 bg-pink-100 rounded-full blur-2xl"></div>
+                <div class="absolute -bottom-6 -right-6 w-40 h-40 bg-purple-100 rounded-full blur-2xl"></div>
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-pink-100">
+                    {% if featured_product.featured_image != blank %}
+                    <img src="{{ featured_product.featured_image | img_url: '1200x' }}" alt="{{ featured_product.featured_image.alt | default: featured_product.title }}" class="w-full h-auto object-cover">
+                    {% else %}
+                    <div class="aspect-[4/3] bg-pink-50 flex items-center justify-center text-pink-400 font-semibold">
+                        Image à ajouter
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="animate-slide-in-right delay-300">
+                {% if section.settings.badge_text != blank %}
+                <div class="inline-flex items-center px-4 py-2 bg-pink-100 rounded-full mb-4">
+                    <span class="text-pink-600 font-semibold text-sm">{{ section.settings.badge_text }}</span>
+                </div>
+                {% endif %}
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">{{ section.settings.title | default: featured_product.title }}</span>
+                </h2>
+                {% if section.settings.subtitle != blank %}
+                <p class="text-xl text-gray-700 mb-4">{{ section.settings.subtitle }}</p>
+                {% endif %}
+                <p class="text-gray-600 text-lg mb-6">
+                    {{ section.settings.description | default: featured_product.description | strip_html | truncate: 220 }}
+                </p>
+
+                <div class="flex items-baseline gap-4 mb-6">
+                    <span class="text-4xl font-bold gradient-text">{{ featured_product.price | money }}</span>
+                    {% if featured_product.compare_at_price > featured_product.price %}
+                    <span class="text-lg text-gray-400 line-through">{{ featured_product.compare_at_price | money }}</span>
+                    <span class="px-3 py-1 bg-pink-100 rounded-full text-pink-600 text-sm font-semibold">
+                        -{{ featured_product.compare_at_price | minus: featured_product.price | times: 100.0 | divided_by: featured_product.compare_at_price | round }}%
+                    </span>
+                    {% endif %}
+                </div>
+
+                {% if section.blocks.size > 0 %}
+                <div class="grid gap-3 mb-8">
+                    {% for block in section.blocks %}
+                    <div class="flex items-start gap-3 text-gray-700" {{ block.shopify_attributes }}>
+                        <div class="w-9 h-9 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white text-lg">{{ block.settings.icon }}</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold">{{ block.settings.title }}</p>
+                            <p class="text-sm text-gray-500">{{ block.settings.text }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="space-y-4">
+                    {% if featured_product.variants.size > 1 %}
+                    <label class="block text-sm font-semibold text-gray-700" for="featuredProductVariant">Choisissez votre option</label>
+                    <select id="featuredProductVariant" name="id" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-pink-400 focus:outline-none">
+                        {% for variant in featured_product.variants %}
+                        <option value="{{ variant.id }}" {% if variant == featured_product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                            {{ variant.title }}{% unless variant.available %} - Rupture{% endunless %}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <input type="hidden" name="id" value="{{ featured_product.selected_or_first_available_variant.id }}">
+                    {% endif %}
+                    <div class="flex items-center gap-3">
+                        <label class="text-sm font-semibold text-gray-700" for="featuredProductQuantity">Quantité</label>
+                        <input id="featuredProductQuantity" name="quantity" type="number" min="1" value="1" class="w-24 px-3 py-2 rounded-lg border border-gray-200 bg-white text-center focus:border-pink-400 focus:outline-none">
+                    </div>
+                    <button type="submit" class="w-full px-8 py-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-xl hover:scale-105 transition-transform duration-300 animate-pulse-glow disabled:opacity-60 disabled:cursor-not-allowed" {% unless featured_product.available %}disabled{% endunless %}>
+                        {% if featured_product.available %}{{ section.settings.cta_text }}{% else %}Rupture de stock{% endif %}
+                    </button>
+                    {% if section.settings.support_note != blank %}
+                    <p class="text-sm text-gray-500">{{ section.settings.support_note }}</p>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Featured Product",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produit à afficher"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "ID d'ancrage",
+      "info": "Permet de créer un lien d'ancrage (ex: reformer)."
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge",
+      "default": "⭐ Bestseller"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre",
+      "default": "Votre Reformer OnaPilates"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sous-titre",
+      "default": "Un studio complet, chez vous, sans abonnement"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Travaillez votre posture, votre force et votre mobilité avec un reformer premium pensé pour la maison. Idéal pour progresser à votre rythme."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texte du bouton",
+      "default": "Ajouter au panier"
+    },
+    {
+      "type": "text",
+      "id": "support_note",
+      "label": "Note de réassurance",
+      "default": "Livraison rapide, paiement sécurisé, assistance dédiée."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "highlight",
+      "name": "Point fort",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icone",
+          "default": "✨"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Confort premium"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texte",
+          "default": "Rails fluides, chariot silencieux, finitions élégantes."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product",
+      "blocks": [
+        {
+          "type": "highlight",
+          "settings": {
+            "icon": "🧘‍♀️",
+            "title": "Sculpte tout le corps",
+            "text": "Renforce la sangle abdominale et améliore la posture."
+          }
+        },
+        {
+          "type": "highlight",
+          "settings": {
+            "icon": "⏱️",
+            "title": "Entraînements rapides",
+            "text": "20 minutes par jour suffisent pour des résultats visibles."
+          }
+        },
+        {
+          "type": "highlight",
+          "settings": {
+            "icon": "🏡",
+            "title": "Adapté à la maison",
+            "text": "Design compact et élégant qui s'intègre partout."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,3 +1,10 @@
+{% assign hero_product = all_products[settings.main_product] %}
+{% if hero_product == blank and collections.all.products.first %}
+  {% assign hero_product = collections.all.products.first %}
+{% endif %}
+{% assign primary_cta_url = section.settings.cta_url_1 | default: hero_product.url %}
+{% assign secondary_cta_url = section.settings.cta_url_2 | default: hero_product.url %}
+
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-36">
     <div class="absolute inset-0 overflow-hidden">
         <div class="absolute top-20 left-10 w-72 h-72 bg-pink-200/30 rounded-full blur-3xl animate-float"></div>
@@ -13,17 +20,29 @@
                 <p class="text-3xl md:text-4xl text-gray-800 mb-4 animate-fade-in-up delay-200">
                     {{ section.settings.hero_subtitle }}
                 </p>
-                <p class="text-lg md:text-xl text-gray-600 mb-12 animate-fade-in-up delay-300">
+                <p class="text-lg md:text-xl text-gray-600 mb-8 animate-fade-in-up delay-300">
                     {{ section.settings.hero_description }}
                 </p>
+                {% if section.blocks.size > 0 %}
+                <div class="flex flex-wrap gap-3 mb-10 animate-fade-in-up delay-400">
+                    {% for block in section.blocks %}
+                    <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 border border-pink-100 rounded-full text-sm font-semibold text-gray-700 shadow-sm" {{ block.shopify_attributes }}>
+                        <svg class="w-4 h-4 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>{{ block.settings.text }}</span>
+                    </span>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <div class="flex flex-col sm:flex-row gap-4 animate-scale-in delay-400">
-                    {% if section.settings.cta_url_1 != blank %}
-                    <a href="{{ section.settings.cta_url_1 }}" class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-semibold text-lg hover:scale-110 transition-transform duration-300 animate-pulse-glow text-center">
+                    {% if primary_cta_url != blank %}
+                    <a href="{{ primary_cta_url }}" class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-semibold text-lg hover:scale-110 transition-transform duration-300 animate-pulse-glow text-center">
                         {{ section.settings.cta_text_1 }} →
                     </a>
                     {% endif %}
-                    {% if section.settings.cta_url_2 != blank %}
-                    <a href="{{ section.settings.cta_url_2 }}" class="px-8 py-4 glass-effect rounded-full text-gray-800 font-semibold text-lg hover:bg-pink-50 transition-all duration-300 border-2 border-pink-300 text-center">
+                    {% if secondary_cta_url != blank %}
+                    <a href="{{ secondary_cta_url }}" class="px-8 py-4 glass-effect rounded-full text-gray-800 font-semibold text-lg hover:bg-pink-50 transition-all duration-300 border-2 border-pink-300 text-center">
                         {{ section.settings.cta_text_2 }}
                     </a>
                     {% endif %}
@@ -94,9 +113,43 @@
       "label": "CTA Button 2 URL"
     }
   ],
+  "blocks": [
+    {
+      "type": "trust_pill",
+      "name": "Trust Pill",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Livraison gratuite"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Hero"
+      "name": "Hero",
+      "blocks": [
+        {
+          "type": "trust_pill",
+          "settings": {
+            "text": "Livraison gratuite"
+          }
+        },
+        {
+          "type": "trust_pill",
+          "settings": {
+            "text": "Paiement sécurisé"
+          }
+        },
+        {
+          "type": "trust_pill",
+          "settings": {
+            "text": "Garantie 2 ans"
+          }
+        }
+      ]
     }
   ]
 }

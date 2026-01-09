@@ -19,6 +19,7 @@
                         </div>
                     </div>
                     
+                    {% if product.images.size > 1 %}
                     <button type="button" id="productPrev" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all hover:scale-110 z-20 cursor-pointer">
                         <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -35,6 +36,7 @@
                         <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/80 {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}"></button>
                         {% endfor %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
             
@@ -61,10 +63,25 @@
                 </div>
                 
                 <div class="animate-fade-in-up delay-600" id="acheter">
-                    <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="space-y-4">
+                        {% if product.variants.size > 1 %}
+                        <label class="block text-sm font-semibold text-gray-700" for="productVariant">Choisissez votre option</label>
+                        <select id="productVariant" name="id" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-pink-400 focus:outline-none">
+                            {% for variant in product.variants %}
+                            <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                                {{ variant.title }}{% unless variant.available %} - Rupture{% endunless %}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        {% else %}
                         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                        <button type="submit" class="w-full px-8 py-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-xl hover:scale-105 transition-transform duration-300 animate-pulse-glow">
-                            💳 Acheter Maintenant
+                        {% endif %}
+                        <div class="flex items-center gap-3">
+                            <label class="text-sm font-semibold text-gray-700" for="productQuantity">Quantité</label>
+                            <input id="productQuantity" name="quantity" type="number" min="1" value="1" class="w-24 px-3 py-2 rounded-lg border border-gray-200 bg-white text-center focus:border-pink-400 focus:outline-none">
+                        </div>
+                        <button type="submit" class="w-full px-8 py-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-xl hover:scale-105 transition-transform duration-300 animate-pulse-glow disabled:opacity-60 disabled:cursor-not-allowed" {% unless product.available %}disabled{% endunless %}>
+                            {% if product.available %}💳 Acheter Maintenant{% else %}Rupture de stock{% endif %}
                         </button>
                     </form>
                 </div>
