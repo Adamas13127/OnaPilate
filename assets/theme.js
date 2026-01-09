@@ -22,7 +22,6 @@ window.addEventListener('scroll', function() {
 
 // Gallery Carousel
 let galleryCurrentSlide = 0;
-const galleryTotalSlides = 5;
 let galleryAutoSlideInterval;
 
 function initGalleryCarousel() {
@@ -31,8 +30,9 @@ function initGalleryCarousel() {
     const galleryPrev = document.getElementById('galleryPrev');
     const galleryDotsContainer = document.querySelector('#galleryCarousel')?.parentElement;
     const galleryDots = galleryDotsContainer ? galleryDotsContainer.querySelectorAll('button[data-slide]') : [];
+    const galleryTotalSlides = gallerySlides ? gallerySlides.children.length : 0;
 
-    if (!gallerySlides) {
+    if (!gallerySlides || galleryTotalSlides <= 1) {
         return;
     }
 
@@ -89,7 +89,6 @@ function initGalleryCarousel() {
 
 // Product Carousel
 let productCurrentSlide = 0;
-const productTotalSlides = 8;
 let productAutoSlideInterval;
 
 function initProductCarousel() {
@@ -98,8 +97,9 @@ function initProductCarousel() {
     const productPrev = document.getElementById('productPrev');
     const productCarouselContainer = document.querySelector('#productCarousel')?.parentElement;
     const productDots = productCarouselContainer ? productCarouselContainer.querySelectorAll('button[data-slide]') : [];
+    const productTotalSlides = productSlides ? productSlides.children.length : 0;
 
-    if (!productSlides) {
+    if (!productSlides || productTotalSlides <= 1) {
         return;
     }
 
@@ -194,47 +194,6 @@ function closeEmailPopup() {
     }
 }
 
-function submitEmail(event) {
-    event.preventDefault();
-    const email = document.getElementById('popupEmail')?.value;
-    
-    if (email) {
-        const popup = document.getElementById('emailPopup');
-        const content = popup?.querySelector('.popup-content');
-        
-        if (content) {
-            content.innerHTML = `
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                    </div>
-                    <h2 class="font-display text-3xl font-bold mb-4 text-gray-800">
-                        Code Envoyé ! 🎉
-                    </h2>
-                    <p class="text-gray-600 mb-4">
-                        Vérifiez votre boîte mail <span class="font-semibold">${email}</span>
-                    </p>
-                    <p class="text-gray-500 text-sm mb-6">
-                        Vous allez recevoir votre code promo <span class="font-bold text-pink-600">-10%</span> dans quelques instants
-                    </p>
-                    <button onclick="closeEmailPopup()" class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-lg hover:scale-105 transition-transform duration-300">
-                        Parfait, Merci !
-                    </button>
-                </div>
-            `;
-        }
-        
-        localStorage.setItem('emailPopupShown', 'true');
-        localStorage.setItem('userEmail', email);
-        
-        setTimeout(() => {
-            closeEmailPopup();
-        }, 3000);
-    }
-}
-
 window.addEventListener('scroll', function() {
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     const windowHeight = window.innerHeight;
@@ -253,28 +212,4 @@ document.getElementById('emailPopup')?.addEventListener('click', function(e) {
     }
 });
 
-// Email Subscription Section
-function submitEmailSubscription(event) {
-    event.preventDefault();
-    const emailInput = document.getElementById('subscriptionEmail');
-    const form = document.getElementById('emailSubscriptionForm');
-    const successMessage = document.getElementById('subscriptionSuccess');
-    
-    if (emailInput && emailInput.value) {
-        localStorage.setItem('userEmail', emailInput.value);
-        localStorage.setItem('emailSubscription', 'true');
-        
-        if (form) form.classList.add('hidden');
-        if (successMessage) successMessage.classList.remove('hidden');
-        
-        setTimeout(() => {
-            if (form) form.classList.remove('hidden');
-            if (successMessage) successMessage.classList.add('hidden');
-            if (emailInput) emailInput.value = '';
-        }, 5000);
-    }
-}
-
-window.submitEmail = submitEmail;
 window.closeEmailPopup = closeEmailPopup;
-window.submitEmailSubscription = submitEmailSubscription;

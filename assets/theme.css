@@ -218,7 +218,8 @@
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, #f8b4d9 0%, #d8b4f8 100%);
+    color: #f8b4d9;
+    background: linear-gradient(135deg, var(--color-primary, #f8b4d9) 0%, var(--color-secondary, #d8b4f8) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

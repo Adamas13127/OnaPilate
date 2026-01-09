@@ -1,9 +1,21 @@
+{% assign header_product = all_products[settings.main_product] %}
+{% if header_product == blank and collections.all.products.first %}
+  {% assign header_product = collections.all.products.first %}
+{% endif %}
+{% assign header_product_url = section.settings.product_url | default: header_product.url %}
+{% assign header_cta_url = section.settings.checkout_url | default: routes.cart_url %}
+{% assign logo_image = section.settings.logo_image %}
+
 {% if section.settings.show_loader %}
 <!-- Loader Screen -->
 <div id="loader" class="fixed inset-0 bg-white z-50 flex items-center justify-center loader">
     <div class="text-center">
         <h1 class="font-display text-6xl md:text-8xl font-bold logo-loader">
-            <span class="gradient-text">{{ shop.name }}</span>
+            {% if logo_image != blank %}
+              <img src="{{ logo_image | img_url: '400x' }}" alt="{{ logo_image.alt | default: shop.name }}" class="mx-auto" style="width: {{ section.settings.logo_width }}px;">
+            {% else %}
+              <span class="gradient-text">{{ shop.name }}</span>
+            {% endif %}
         </h1>
     </div>
 </div>
@@ -12,16 +24,17 @@
 <!-- Navigation -->
 <nav id="navbar" class="fixed top-12 md:top-16 left-1/2 transform -translate-x-1/2 z-40 navbar-glass rounded-full px-4 md:px-8 py-3 md:py-4 navbar-fade-in max-w-[95%] md:max-w-none">
     <div class="flex items-center justify-between gap-4 md:gap-8 w-full">
-        <a href="{{ routes.root_url }}" class="font-display text-lg md:text-xl font-bold gradient-text">{{ shop.name }}</a>
+        <a href="{{ routes.root_url }}" class="font-display text-lg md:text-xl font-bold gradient-text flex items-center gap-3">
+            {% if logo_image != blank %}
+              <img src="{{ logo_image | img_url: '200x' }}" alt="{{ logo_image.alt | default: shop.name }}" class="h-8 w-auto" style="height: {{ section.settings.logo_height }}px;">
+            {% endif %}
+            <span>{{ shop.name }}</span>
+        </a>
         <div class="flex items-center gap-3 md:gap-6">
             <a href="{{ routes.root_url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Accueil</a>
             {% comment %} Lien vers le produit {% endcomment %}
-            {% if section.settings.product_url != blank %}
-                <a href="{{ section.settings.product_url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Produit</a>
-            {% elsif collections.all.products.first %}
-                <a href="{{ collections.all.products.first.url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Produit</a>
-            {% elsif all_products.first %}
-                <a href="{{ all_products.first.url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Produit</a>
+            {% if header_product_url != blank %}
+                <a href="{{ header_product_url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Produit</a>
             {% endif %}
             {% comment %} Liens supplémentaires {% endcomment %}
             {% if section.settings.catalog_url != blank %}
@@ -34,7 +47,7 @@
             {% for link in linklists.main-menu.links %}
                 <a href="{{ link.url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">{{ link.title }}</a>
             {% endfor %}
-            <a href="{{ routes.cart_url }}" class="px-4 md:px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white text-sm md:text-base font-semibold hover:scale-105 transition-transform whitespace-nowrap">Acheter</a>
+            <a href="{{ header_cta_url | default: header_product_url }}" class="px-4 md:px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white text-sm md:text-base font-semibold hover:scale-105 transition-transform whitespace-nowrap">Acheter</a>
         </div>
     </div>
 </nav>
@@ -50,10 +63,41 @@
       "default": true
     },
     {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Largeur du logo (loader)",
+      "min": 120,
+      "max": 320,
+      "step": 10,
+      "default": 200,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Hauteur du logo (navigation)",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
       "type": "url",
       "id": "product_url",
       "label": "URL Produit",
       "info": "URL de votre produit principal (ex: /products/reformer-onapilates). Si vide, utilise le premier produit disponible."
+    },
+    {
+      "type": "url",
+      "id": "checkout_url",
+      "label": "URL Paiement",
+      "info": "URL vers votre page de paiement ou panier (ex: /pages/paiement ou /cart)."
     },
     {
       "type": "url",
