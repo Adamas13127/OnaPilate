@@ -8,6 +8,17 @@
     "theme_support_url": ""
   },
   {
+    "name": "Produit principal",
+    "settings": [
+      {
+        "type": "product",
+        "id": "main_product",
+        "label": "Produit vedette",
+        "info": "Sélectionnez le Reformer principal pour alimenter les CTA et sections clés du thème."
+      }
+    ]
+  },
+  {
     "name": "Couleurs",
     "settings": [
       {

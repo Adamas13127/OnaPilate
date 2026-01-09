@@ -1,3 +1,9 @@
+{% assign main_product = all_products[settings.main_product] %}
+{% if main_product == blank and collections.all.products.first %}
+  {% assign main_product = collections.all.products.first %}
+{% endif %}
+{% assign cta_url = section.settings.cta_url | default: main_product.url %}
+
 <section class="py-20 px-6 bg-gray-50">
     <div class="container mx-auto">
         <h2 class="font-display text-5xl md:text-6xl font-bold text-center mb-16 animate-fade-in-up">
@@ -16,9 +22,9 @@
             {% endfor %}
         </div>
         
-        {% if section.settings.cta_text != blank %}
+        {% if section.settings.cta_text != blank and cta_url != blank %}
         <div class="text-center mt-12 animate-fade-in-up delay-700">
-            <a href="{{ section.settings.cta_url }}" class="inline-block px-10 py-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-xl hover:scale-110 transition-transform duration-300 animate-pulse-glow">
+            <a href="{{ cta_url }}" class="inline-block px-10 py-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-xl hover:scale-110 transition-transform duration-300 animate-pulse-glow">
                 {{ section.settings.cta_text }} →
             </a>
         </div>
