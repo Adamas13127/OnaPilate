@@ -1,0 +1,18 @@
+<footer class="py-10 px-6 border-t border-gray-200" style="background-color: {{ settings.footer_bg_color }};">
+    <div class="container mx-auto text-center">
+        <p style="color: {{ settings.footer_text_color }};">
+            {% if settings.footer_text != blank %}
+                {{ settings.footer_text }}
+            {% else %}
+                © {{ 'now' | date: "%Y" }} {{ shop.name }}. Tous droits réservés.
+            {% endif %}
+        </p>
+    </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

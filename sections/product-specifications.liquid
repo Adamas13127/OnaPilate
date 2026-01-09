@@ -1,0 +1,62 @@
+<section class="py-20 px-6 bg-gray-50">
+    <div class="container mx-auto max-w-4xl">
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in-up">
+            <span class="gradient-text">{{ section.settings.title }}</span>
+        </h2>
+        
+        <div class="glass-effect rounded-3xl p-8 md:p-12 animate-scale-in delay-200">
+            <div class="grid md:grid-cols-2 gap-8">
+                {% for block in section.blocks %}
+                <div class="flex items-start gap-4" {{ block.shopify_attributes }}>
+                    <div class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold">{{ forloop.index }}</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">{{ block.settings.heading }}</h3>
+                        <p class="text-gray-600">{{ block.settings.text }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Specifications",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Spécifications Techniques"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Specification",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Specification Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Specification description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Specifications"
+    }
+  ]
+}
+{% endschema %}

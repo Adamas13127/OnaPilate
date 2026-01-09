@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}{% if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags.join(', ') }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+    
+    {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {{ content_for_header }}
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+    {% render 'dynamic-styles' %}
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</head>
+<body class="bg-white text-gray-900 min-h-screen">
+    {% section 'promo-banner' %}
+    {% section 'header' %}
+    
+    <main id="main-content" role="main">
+        {{ content_for_layout }}
+    </main>
+    
+    {% section 'footer' %}
+    {% section 'email-popup' %}
+</body>
+</html>

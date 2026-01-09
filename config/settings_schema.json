@@ -1,0 +1,400 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "OnaPilates",
+    "theme_version": "1.0.0",
+    "theme_author": "OnaPilates",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Couleur Primaire",
+        "default": "#f8b4d9",
+        "info": "Couleur principale (rose pastel)"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Couleur Secondaire",
+        "default": "#d8b4f8",
+        "info": "Couleur secondaire (violet pastel)"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Couleur du Texte",
+        "default": "#1f2937",
+        "info": "Couleur principale du texte"
+      },
+      {
+        "type": "color",
+        "id": "color_text_light",
+        "label": "Couleur du Texte Clair",
+        "default": "#6b7280",
+        "info": "Couleur pour les textes secondaires"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Couleur de Fond",
+        "default": "#ffffff",
+        "info": "Couleur de fond principale"
+      },
+      {
+        "type": "color",
+        "id": "color_background_alt",
+        "label": "Couleur de Fond Alternative",
+        "default": "#f9fafb",
+        "info": "Couleur de fond pour les sections alternées"
+      }
+    ]
+  },
+  {
+    "name": "Typographie",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Police des Titres",
+        "default": "playfair_display_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Police du Corps",
+        "default": "inter_n4"
+      },
+      {
+        "type": "range",
+        "id": "font_size_base",
+        "label": "Taille de Police de Base",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "font_size_heading_1",
+        "label": "Taille Titre H1",
+        "min": 32,
+        "max": 96,
+        "step": 2,
+        "default": 64,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "font_size_heading_2",
+        "label": "Taille Titre H2",
+        "min": 24,
+        "max": 72,
+        "step": 2,
+        "default": 48,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "font_size_heading_3",
+        "label": "Taille Titre H3",
+        "min": 18,
+        "max": 48,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "line_height",
+        "label": "Hauteur de Ligne",
+        "min": 1.2,
+        "max": 2.0,
+        "step": 0.1,
+        "default": 1.6
+      }
+    ]
+  },
+  {
+    "name": "Espacements",
+    "settings": [
+      {
+        "type": "range",
+        "id": "spacing_section",
+        "label": "Espacement entre Sections",
+        "min": 40,
+        "max": 120,
+        "step": 10,
+        "default": 80,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "spacing_container",
+        "label": "Espacement Conteneur",
+        "min": 16,
+        "max": 48,
+        "step": 4,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "spacing_element",
+        "label": "Espacement entre Éléments",
+        "min": 8,
+        "max": 32,
+        "step": 4,
+        "default": 16,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Navigation",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_loader",
+        "label": "Afficher le Loader",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "navbar_padding",
+        "label": "Padding de la Navbar",
+        "min": 8,
+        "max": 24,
+        "step": 2,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "navbar_border_radius",
+        "label": "Rayon de Bordure Navbar",
+        "min": 20,
+        "max": 50,
+        "step": 5,
+        "default": 9999,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Bannière Promotionnelle",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_banner",
+        "label": "Activer la Bannière",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "promo_text",
+        "label": "Texte de Promotion",
+        "default": "SOLDES !!! -30% AVEC LE CODE :"
+      },
+      {
+        "type": "text",
+        "id": "promo_code",
+        "label": "Code Promo",
+        "default": "BISOU30"
+      },
+      {
+        "type": "color",
+        "id": "banner_bg_color",
+        "label": "Couleur de Fond Bannière",
+        "default": "#e5e7eb"
+      },
+      {
+        "type": "color",
+        "id": "banner_text_color",
+        "label": "Couleur du Texte Bannière",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "name": "Boutons",
+    "settings": [
+      {
+        "type": "range",
+        "id": "button_border_radius",
+        "label": "Rayon de Bordure des Boutons",
+        "min": 8,
+        "max": 50,
+        "step": 2,
+        "default": 9999,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "button_padding_x",
+        "label": "Padding Horizontal Boutons",
+        "min": 12,
+        "max": 48,
+        "step": 4,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "button_padding_y",
+        "label": "Padding Vertical Boutons",
+        "min": 8,
+        "max": 24,
+        "step": 2,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "button_font_size",
+        "label": "Taille de Police des Boutons",
+        "min": 12,
+        "max": 24,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_animations",
+        "label": "Activer les Animations",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "animation_speed",
+        "label": "Vitesse des Animations",
+        "min": 0.3,
+        "max": 2.0,
+        "step": 0.1,
+        "default": 0.8,
+        "unit": "s"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_float_animation",
+        "label": "Animation Flottante",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_pulse_glow",
+        "label": "Effet Pulse Glow",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Carousels",
+    "settings": [
+      {
+        "type": "range",
+        "id": "carousel_auto_slide_delay",
+        "label": "Délai Auto-Slide Carousel",
+        "min": 2000,
+        "max": 8000,
+        "step": 500,
+        "default": 4000,
+        "unit": "ms"
+      },
+      {
+        "type": "checkbox",
+        "id": "carousel_show_arrows",
+        "label": "Afficher les Flèches",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "carousel_show_dots",
+        "label": "Afficher les Points",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Popup Email",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_email_popup",
+        "label": "Activer le Popup Email",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "popup_trigger_scroll",
+        "label": "Déclenchement au Scroll (%)",
+        "min": 10,
+        "max": 80,
+        "step": 5,
+        "default": 30,
+        "unit": "%"
+      },
+      {
+        "type": "text",
+        "id": "popup_discount_code",
+        "label": "Code Promo Popup",
+        "default": "-10%"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "footer_text",
+        "label": "Texte du Footer",
+        "default": "© 2024 OnaPilates. Tous droits réservés."
+      },
+      {
+        "type": "color",
+        "id": "footer_bg_color",
+        "label": "Couleur de Fond Footer",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "footer_text_color",
+        "label": "Couleur du Texte Footer",
+        "default": "#9ca3af"
+      }
+    ]
+  },
+  {
+    "name": "Responsive",
+    "settings": [
+      {
+        "type": "range",
+        "id": "mobile_breakpoint",
+        "label": "Point de Rupture Mobile",
+        "min": 640,
+        "max": 1024,
+        "step": 16,
+        "default": 768,
+        "unit": "px"
+      },
+      {
+        "type": "checkbox",
+        "id": "mobile_menu_hamburger",
+        "label": "Menu Hamburger sur Mobile",
+        "default": true
+      }
+    ]
+  }
+]

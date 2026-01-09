@@ -1,0 +1,117 @@
+<style>
+  :root {
+    --color-primary: {{ settings.color_primary }};
+    --color-secondary: {{ settings.color_secondary }};
+    --color-text: {{ settings.color_text | default: '#1f2937' }};
+    --color-text-light: {{ settings.color_text_light | default: '#6b7280' }};
+    --color-background: {{ settings.color_background | default: '#ffffff' }};
+    --color-background-alt: {{ settings.color_background_alt | default: '#f9fafb' }};
+    --font-size-base: {{ settings.font_size_base | default: 16 }}px;
+    --font-size-h1: {{ settings.font_size_heading_1 | default: 64 }}px;
+    --font-size-h2: {{ settings.font_size_heading_2 | default: 48 }}px;
+    --font-size-h3: {{ settings.font_size_heading_3 | default: 24 }}px;
+    --line-height: {{ settings.line_height | default: 1.6 }};
+    --spacing-section: {{ settings.spacing_section | default: 80 }}px;
+    --spacing-container: {{ settings.spacing_container | default: 24 }}px;
+    --spacing-element: {{ settings.spacing_element | default: 16 }}px;
+    --button-border-radius: {{ settings.button_border_radius | default: 9999 }}px;
+    --button-padding-x: {{ settings.button_padding_x | default: 24 }}px;
+    --button-padding-y: {{ settings.button_padding_y | default: 12 }}px;
+    --button-font-size: {{ settings.button_font_size | default: 16 }}px;
+    --navbar-padding: {{ settings.navbar_padding | default: 12 }}px;
+    --navbar-border-radius: {{ settings.navbar_border_radius | default: 9999 }}px;
+    --animation-speed: {{ settings.animation_speed | default: 0.8 }}s;
+    --banner-bg-color: {{ settings.banner_bg_color | default: '#e5e7eb' }};
+    --banner-text-color: {{ settings.banner_text_color | default: '#000000' }};
+    --footer-bg-color: {{ settings.footer_bg_color | default: '#ffffff' }};
+    --footer-text-color: {{ settings.footer_text_color | default: '#9ca3af' }};
+  }
+
+  {% if settings.font_heading %}
+    .font-display {
+      font-family: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+      font-weight: {{ settings.font_heading.weight }};
+      font-style: {{ settings.font_heading.style }};
+    }
+  {% endif %}
+
+  {% if settings.font_body %}
+    body, * {
+      font-family: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+      font-weight: {{ settings.font_body.weight }};
+      font-style: {{ settings.font_body.style }};
+    }
+  {% endif %}
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height);
+  }
+
+  h1 {
+    font-size: var(--font-size-h1);
+  }
+
+  h2 {
+    font-size: var(--font-size-h2);
+  }
+
+  h3 {
+    font-size: var(--font-size-h3);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .navbar-glass {
+    padding: var(--navbar-padding);
+    border-radius: var(--navbar-border-radius);
+  }
+
+  {% unless settings.enable_animations %}
+    .animate-fade-in-up,
+    .animate-fade-in,
+    .animate-slide-in-left,
+    .animate-slide-in-right,
+    .animate-scale-in,
+    .animate-float,
+    .animate-pulse-glow {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+  {% endunless %}
+
+  {% unless settings.enable_float_animation %}
+    .animate-float {
+      animation: none !important;
+    }
+  {% endunless %}
+
+  {% unless settings.enable_pulse_glow %}
+    .animate-pulse-glow {
+      animation: none !important;
+    }
+  {% endunless %}
+
+  section {
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-section);
+  }
+
+  .container {
+    padding-left: var(--spacing-container);
+    padding-right: var(--spacing-container);
+  }
+
+  button, .btn, a[class*="bg-gradient"] {
+    border-radius: var(--button-border-radius);
+    padding: var(--button-padding-y) var(--button-padding-x);
+    font-size: var(--button-font-size);
+  }
+</style>

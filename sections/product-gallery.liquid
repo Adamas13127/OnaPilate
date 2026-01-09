@@ -1,0 +1,49 @@
+<section class="py-20 px-6 bg-gray-50">
+    <div class="container mx-auto">
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in-up">
+            <span class="gradient-text">{{ section.settings.title }}</span>
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {% for block in section.blocks limit: 6 %}
+            <div class="animate-scale-in delay-{{ forloop.index | times: 100 }}" {{ block.shopify_attributes }}>
+                {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.image.alt }}" class="rounded-2xl shadow-lg w-full h-64 object-cover hover:scale-105 transition-transform duration-300">
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Galerie Produit"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Gallery"
+    }
+  ]
+}
+{% endschema %}

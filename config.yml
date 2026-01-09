@@ -1,0 +1,8 @@
+name: OnaPilate
+version: 1.0.0
+settings:
+  current:
+    color_primary: "#f8b4d9"
+    color_secondary: "#d8b4f8"
+    promo_text: "SOLDES !!! -30% AVEC LE CODE : BISOU30"
+    promo_code: "BISOU30"

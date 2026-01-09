@@ -1,0 +1,72 @@
+{% if section.settings.show_loader %}
+<!-- Loader Screen -->
+<div id="loader" class="fixed inset-0 bg-white z-50 flex items-center justify-center loader">
+    <div class="text-center">
+        <h1 class="font-display text-6xl md:text-8xl font-bold logo-loader">
+            <span class="gradient-text">{{ shop.name }}</span>
+        </h1>
+    </div>
+</div>
+{% endif %}
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed top-12 md:top-16 left-1/2 transform -translate-x-1/2 z-40 navbar-glass rounded-full px-4 md:px-8 py-3 md:py-4 navbar-fade-in max-w-[95%] md:max-w-none">
+    <div class="flex items-center justify-between gap-4 md:gap-8 w-full">
+        <a href="{{ routes.root_url }}" class="font-display text-lg md:text-xl font-bold gradient-text">{{ shop.name }}</a>
+        <div class="flex items-center gap-3 md:gap-6">
+            <a href="{{ routes.root_url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Accueil</a>
+            {% comment %} Lien vers le produit {% endcomment %}
+            {% if section.settings.product_url != blank %}
+                <a href="{{ section.settings.product_url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Produit</a>
+            {% elsif collections.all.products.first %}
+                <a href="{{ collections.all.products.first.url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Produit</a>
+            {% elsif all_products.first %}
+                <a href="{{ all_products.first.url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Produit</a>
+            {% endif %}
+            {% comment %} Liens supplémentaires {% endcomment %}
+            {% if section.settings.catalog_url != blank %}
+                <a href="{{ section.settings.catalog_url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Catalogue</a>
+            {% endif %}
+            {% if section.settings.contact_url != blank %}
+                <a href="{{ section.settings.contact_url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Contact</a>
+            {% endif %}
+            {% comment %} Menu de navigation Shopify {% endcomment %}
+            {% for link in linklists.main-menu.links %}
+                <a href="{{ link.url }}" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">{{ link.title }}</a>
+            {% endfor %}
+            <a href="{{ routes.cart_url }}" class="px-4 md:px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white text-sm md:text-base font-semibold hover:scale-105 transition-transform whitespace-nowrap">Acheter</a>
+        </div>
+    </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_loader",
+      "label": "Afficher le loader",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "URL Produit",
+      "info": "URL de votre produit principal (ex: /products/reformer-onapilates). Si vide, utilise le premier produit disponible."
+    },
+    {
+      "type": "url",
+      "id": "catalog_url",
+      "label": "URL Catalogue",
+      "info": "URL vers votre catalogue (ex: /collections/all ou /pages/catalogue)"
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "URL Contact",
+      "info": "URL vers votre page de contact (ex: /pages/contact)"
+    }
+  ]
+}
+{% endschema %}

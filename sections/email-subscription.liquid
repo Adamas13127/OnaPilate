@@ -1,0 +1,127 @@
+<section class="py-16 px-6 bg-white relative overflow-hidden">
+    <div class="container mx-auto max-w-6xl">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="animate-slide-in-left delay-200">
+                <div class="inline-block px-4 py-2 bg-pink-100 rounded-full mb-4">
+                    <span class="text-pink-600 font-semibold text-sm">🎁 Offre Exclusive</span>
+                </div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+                    <span class="gradient-text">{{ section.settings.title }}</span>
+                    <br>{{ section.settings.subtitle }}
+                </h2>
+                <p class="text-gray-600 mb-6 text-lg">
+                    {{ section.settings.description }}
+                </p>
+                
+                <form id="emailSubscriptionForm" onsubmit="submitEmailSubscription(event)" class="space-y-3">
+                    <div class="flex gap-3">
+                        <input 
+                            type="email" 
+                            id="subscriptionEmail" 
+                            required
+                            placeholder="{{ section.settings.placeholder }}" 
+                            class="flex-1 px-6 py-4 rounded-xl border-2 border-gray-200 focus:border-pink-400 focus:outline-none transition-all bg-gray-50"
+                        >
+                        <button 
+                            type="submit" 
+                            class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl text-white font-bold hover:scale-105 transition-transform duration-300 shadow-lg whitespace-nowrap"
+                        >
+                            {{ section.settings.button_text }}
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-400">
+                        {{ section.settings.disclaimer }}
+                    </p>
+                </form>
+                
+                <div id="subscriptionSuccess" class="hidden mt-4 animate-fade-in-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-xl">
+                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span class="text-green-700 font-semibold text-sm">{{ section.settings.success_message }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative animate-slide-in-right delay-300">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-pink-200 to-purple-200 rounded-3xl transform rotate-3 animate-float"></div>
+                    <div class="relative bg-white rounded-3xl p-8 shadow-2xl border-4 border-pink-100">
+                        <div class="text-center">
+                            <div class="w-24 h-24 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform -rotate-6">
+                                <span class="text-5xl">📧</span>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="text-4xl font-bold gradient-text">{{ section.settings.discount }}</div>
+                                <div class="text-gray-600 font-semibold">Code Promo</div>
+                                <div class="text-sm text-gray-500">Exclusif pour vous</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Email Subscription",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "-10% Supplémentaire"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "sur votre première commande"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Inscrivez-vous pour recevoir nos actualités et un code promo exclusif. Le code vous sera envoyé par email."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email Placeholder",
+      "default": "Entrez votre email"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Recevoir"
+    },
+    {
+      "type": "text",
+      "id": "discount",
+      "label": "Discount Text",
+      "default": "-10%"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "En vous inscrivant, vous acceptez de recevoir nos offres exclusives"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Code envoyé ! Vérifiez votre boîte mail"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Email Subscription"
+    }
+  ]
+}
+{% endschema %}

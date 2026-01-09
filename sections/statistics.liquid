@@ -1,0 +1,131 @@
+<section class="py-20 px-6 bg-gradient-to-br from-pink-50 via-purple-50 to-white relative overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-10 right-10 w-64 h-64 bg-pink-200/20 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-10 left-10 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl animate-float delay-500"></div>
+    </div>
+    
+    <div class="container mx-auto relative z-10">
+        <div class="text-center mb-16 animate-fade-in-up">
+            <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                <span class="gradient-text">{{ section.settings.title }}</span>
+            </h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                {{ section.settings.description }}
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {% for block in section.blocks %}
+            <div class="glass-effect rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300 animate-scale-in delay-{{ forloop.index | times: 100 }}" {{ block.shopify_attributes }}>
+                <div class="text-5xl md:text-6xl font-bold gradient-text mb-4">{{ block.settings.number }}</div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ block.settings.heading }}</h3>
+                <p class="text-gray-600 text-sm">{{ block.settings.text }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if section.settings.cta_text != blank %}
+        <div class="mt-12 text-center animate-fade-in-up delay-600">
+            <a href="{{ section.settings.cta_url }}" class="inline-block px-10 py-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-xl hover:scale-110 transition-transform duration-300 animate-pulse-glow">
+                {{ section.settings.cta_text }} →
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Statistics",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Des Résultats Qui Parlent"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Rejoignez des milliers de personnes qui ont transformé leur bien-être avec OnaPilates"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Rejoindre la Communauté"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "statistic",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "98%"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Clients Satisfaits"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Notre taux de satisfaction exceptionnel"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Statistics",
+      "blocks": [
+        {
+          "type": "statistic",
+          "settings": {
+            "number": "98%",
+            "heading": "Clients Satisfaits",
+            "text": "Notre taux de satisfaction exceptionnel"
+          }
+        },
+        {
+          "type": "statistic",
+          "settings": {
+            "number": "92%",
+            "heading": "Résultats en 30 Jours",
+            "text": "Voyez des changements dès le premier mois"
+          }
+        },
+        {
+          "type": "statistic",
+          "settings": {
+            "number": "15K+",
+            "heading": "Utilisateurs Actifs",
+            "text": "Une communauté grandissante chaque jour"
+          }
+        },
+        {
+          "type": "statistic",
+          "settings": {
+            "number": "4.9/5",
+            "heading": "Note Moyenne",
+            "text": "Basée sur plus de 5000 avis clients"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,70 @@
+<section class="py-20 px-6 bg-gray-50">
+    <div class="container mx-auto">
+        <h2 class="font-display text-5xl md:text-6xl font-bold text-center mb-16 animate-fade-in-up">
+            <span class="gradient-text">{{ section.settings.title }}</span>
+        </h2>
+        
+        <div class="relative max-w-5xl mx-auto">
+            <div id="galleryCarousel" class="carousel-container relative overflow-hidden rounded-2xl">
+                <div id="gallerySlides" class="flex carousel-slide" style="transform: translateX(0%);">
+                    {% for block in section.blocks %}
+                    <div class="min-w-full" {{ block.shopify_attributes }}>
+                        {% if block.settings.image != blank %}
+                        <img src="{{ block.settings.image | img_url: '1200x' }}" alt="{{ block.settings.image.alt }}" class="rounded-2xl shadow-lg w-full h-80 md:h-96 object-cover">
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <button type="button" id="galleryPrev" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all hover:scale-110 z-20 cursor-pointer">
+                <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <button type="button" id="galleryNext" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all hover:scale-110 z-20 cursor-pointer">
+                <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+            
+            <div class="flex justify-center gap-2 mt-6">
+                {% for block in section.blocks %}
+                <button class="carousel-dot w-3 h-3 rounded-full bg-pink-300 {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}"></button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Découvrez Notre Reformer"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gallery"
+    }
+  ]
+}
+{% endschema %}

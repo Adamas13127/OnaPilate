@@ -1,0 +1,35 @@
+{% if settings.enable_banner %}
+<div id="promoBanner" class="fixed top-0 left-0 w-full z-50 py-3 banner-slide" style="display: none; background-color: {{ settings.banner_bg_color }};">
+    <div class="container mx-auto px-4 text-center">
+        <p class="font-bold text-sm md:text-base banner-pulse" style="color: {{ settings.banner_text_color }};">
+            {{ settings.promo_text }} <span style="color: {{ settings.color_primary }};">{{ settings.promo_code }}</span>
+        </p>
+    </div>
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Promotion Banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_banner",
+      "label": "Enable Banner",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "promo_text",
+      "label": "Promotion Text",
+      "default": "SOLDES !!! -30% AVEC LE CODE :"
+    },
+    {
+      "type": "text",
+      "id": "promo_code",
+      "label": "Promo Code",
+      "default": "BISOU30"
+    }
+  ]
+}
+{% endschema %}
