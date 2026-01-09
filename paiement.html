@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement - OnaPilate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(219, 39, 119, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(219, 39, 119, 0.6);
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bannerPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes bannerSlide {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
+        
+        .delay-600 {
+            animation-delay: 0.6s;
+        }
+        
+        .delay-700 {
+            animation-delay: 0.7s;
+        }
+        
+        .delay-800 {
+            animation-delay: 0.8s;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #f8b4d9 0%, #d8b4f8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(248, 180, 217, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        
+        .navbar-fade-in.show {
+            opacity: 1;
+        }
+        
+        .navbar-slide {
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        .banner-pulse {
+            animation: bannerPulse 2s ease-in-out infinite;
+        }
+        
+        .banner-slide {
+            animation: bannerSlide 0.6s ease-out forwards;
+        }
+        
+        .input-focus:focus {
+            border-color: #f8b4d9;
+            box-shadow: 0 0 0 3px rgba(248, 180, 217, 0.1);
+        }
+        
+        .payment-card {
+            transition: all 0.3s ease;
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .payment-card.selected {
+            border: 2px solid #f8b4d9;
+            background: linear-gradient(135deg, rgba(248, 180, 217, 0.1) 0%, rgba(216, 180, 248, 0.1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+    <!-- Promotion Banner -->
+    <div id="promoBanner" class="fixed top-0 left-0 w-full z-50 bg-gray-200 py-3 banner-slide">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-black font-bold text-sm md:text-base banner-pulse">
+                SOLDES !!! -30% AVEC LE CODE : <span class="text-pink-600">BISOU30</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-12 md:top-16 left-1/2 transform -translate-x-1/2 z-40 navbar-glass rounded-full px-4 md:px-8 py-3 md:py-4 navbar-fade-in show max-w-[95%] md:max-w-none">
+        <div class="flex items-center justify-between gap-4 md:gap-8 w-full">
+            <a href="index.html" class="font-display text-lg md:text-xl font-bold gradient-text">OnaPilate</a>
+            <div class="flex items-center gap-3 md:gap-6">
+                <a href="index.html" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Accueil</a>
+                <a href="produit.html" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Produit</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-32 md:pt-36 pb-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <!-- Header -->
+            <div class="text-center mb-12 animate-fade-in-up">
+                <h1 class="font-display text-5xl md:text-6xl font-bold mb-4">
+                    <span class="gradient-text">Finalisez Votre Commande</span>
+                </h1>
+                <p class="text-gray-600 text-lg">Votre Reformer OnaPilate vous attend</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Left Column - Form -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Delivery Information -->
+                    <div class="glass-effect rounded-2xl p-8 animate-slide-in-left delay-200">
+                        <h2 class="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-3">
+                            <span class="w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white">1</span>
+                            Informations de Livraison
+                        </h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="Jean">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nom</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="Dupont">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="jean.dupont@example.com">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
+                                <input type="tel" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="06 12 34 56 78">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Adresse</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="123 Rue de la République">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Code Postal</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="75001">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ville</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="Paris">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="glass-effect rounded-2xl p-8 animate-slide-in-left delay-400">
+                        <h2 class="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-3">
+                            <span class="w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white">2</span>
+                            Méthode de Paiement
+                        </h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="payment-card glass-effect rounded-xl p-6 cursor-pointer selected" onclick="selectPayment('card')">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Carte Bancaire</h3>
+                                        <p class="text-sm text-gray-600">Visa, Mastercard, Amex</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-card glass-effect rounded-xl p-6 cursor-pointer" onclick="selectPayment('paypal')">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.203zm14.146-14.42a13.249 13.249 0 0 0-.44-.96 5.53 5.53 0 0 0-.63-.99 3.567 3.567 0 0 0-1.13-.88c-.32-.19-.66-.33-1.02-.42a5.087 5.087 0 0 0-1.19-.11h-3.73a.848.848 0 0 0-.839.713l-2.713 17.414a.641.641 0 0 0 .633.74h2.907a.848.848 0 0 0 .839-.713l.782-5.02h1.991c4.117 0 7.307-2.106 8.29-6.717.23-1.18.15-2.22-.52-3.1z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">PayPal</h3>
+                                        <p class="text-sm text-gray-600">Paiement sécurisé</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Details -->
+                        <div id="cardDetails" class="mt-6 space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Numéro de Carte</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="1234 5678 9012 3456" maxlength="19">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Date d'Expiration</label>
+                                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="MM/AA" maxlength="5">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">CVV</label>
+                                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="123" maxlength="3">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nom sur la Carte</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all" placeholder="JEAN DUPONT">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="glass-effect rounded-2xl p-8 sticky top-24 animate-slide-in-right delay-300">
+                        <h2 class="text-2xl font-bold mb-6 text-gray-800">Récapitulatif</h2>
+                        
+                        <!-- Product -->
+                        <div class="flex gap-4 mb-6 pb-6 border-b border-gray-200">
+                            <img src="img/IMG_5564.jpg" alt="Reformer OnaPilate" class="w-20 h-20 rounded-lg object-cover">
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800">Reformer OnaPilate</h3>
+                                <p class="text-sm text-gray-600">Quantité: 1</p>
+                                <p class="text-lg font-bold gradient-text mt-2">1 299€</p>
+                            </div>
+                        </div>
+
+                        <!-- Summary -->
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-gray-600">
+                                <span>Sous-total</span>
+                                <span>1 299€</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600">
+                                <span>Livraison</span>
+                                <span class="text-green-600 font-semibold">Gratuite</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Code promo</span>
+                                <span class="text-pink-600 font-semibold">-30%</span>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-4 mb-6">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold text-gray-800">Total</span>
+                                <div class="text-right">
+                                    <span class="text-xl text-gray-400 line-through">1 599€</span>
+                                    <span class="text-2xl font-bold gradient-text ml-2">909€</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Badges -->
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Paiement sécurisé SSL</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Livraison sous 5-7 jours</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Garantie 2 ans incluse</span>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button onclick="processPayment()" class="w-full px-8 py-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-xl hover:scale-105 transition-transform duration-300 animate-pulse-glow">
+                            Confirmer le Paiement
+                        </button>
+                        
+                        <p class="text-xs text-center text-gray-500 mt-4">
+                            En cliquant, vous acceptez nos <a href="#" class="text-pink-600 hover:underline">conditions générales</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-10 px-6 border-t border-gray-200 bg-white">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400">© 2024 OnaPilate. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar and banner scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const banner = document.getElementById('promoBanner');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                if (banner) banner.style.display = 'block';
+                if (navbar) navbar.classList.add('show');
+            }
+        });
+
+        // Payment method selection
+        function selectPayment(method) {
+            const cards = document.querySelectorAll('.payment-card');
+            cards.forEach(card => card.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            const cardDetails = document.getElementById('cardDetails');
+            if (method === 'paypal') {
+                cardDetails.style.display = 'none';
+            } else {
+                cardDetails.style.display = 'block';
+            }
+        }
+
+        // Format card number
+        document.querySelector('input[placeholder="1234 5678 9012 3456"]')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Format expiration date
+        document.querySelector('input[placeholder="MM/AA"]')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Process payment
+        function processPayment() {
+            const button = event.target;
+            button.disabled = true;
+            button.textContent = 'Traitement en cours...';
+            button.classList.add('opacity-75');
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                alert('Paiement réussi ! Votre commande a été confirmée. 🎉');
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

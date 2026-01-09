@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnaPilate - Votre Studio de Pilates à la Maison</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(219, 39, 119, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(219, 39, 119, 0.6);
+            }
+        }
+        
+        @keyframes loaderFadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        
+        @keyframes logoAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bannerPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes bannerSlide {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes popupSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .popup-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .popup-content {
+            animation: popupSlideIn 0.5s ease-out;
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
+        
+        .delay-600 {
+            animation-delay: 0.6s;
+        }
+        
+        .delay-700 {
+            animation-delay: 0.7s;
+        }
+        
+        .delay-800 {
+            animation-delay: 0.8s;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #f8b4d9 0%, #d8b4f8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(248, 180, 217, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .loader {
+            animation: loaderFadeOut 0.5s ease-out 2.5s forwards;
+        }
+        
+        .logo-loader {
+            animation: logoAnimation 1.5s ease-out;
+        }
+        
+        .navbar-slide {
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        .navbar-fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        
+        .navbar-fade-in.show {
+            opacity: 1;
+        }
+        
+        .banner-pulse {
+            animation: bannerPulse 2s ease-in-out infinite;
+        }
+        
+        .banner-slide {
+            animation: bannerSlide 0.6s ease-out forwards;
+        }
+        
+        .carousel-slide {
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-container {
+            overflow: hidden;
+        }
+        
+        .carousel-dot {
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: linear-gradient(135deg, #f8b4d9 0%, #d8b4f8 100%);
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen">
+    <!-- Loader Screen -->
+    <div id="loader" class="fixed inset-0 bg-white z-50 flex items-center justify-center loader">
+        <div class="text-center">
+            <h1 class="font-display text-6xl md:text-8xl font-bold logo-loader">
+                <span class="gradient-text">OnaPilate</span>
+            </h1>
+        </div>
+    </div>
+
+    <!-- Promotion Banner -->
+    <div id="promoBanner" class="fixed top-0 left-0 w-full z-50 bg-gray-200 py-3 banner-slide" style="display: none;">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-black font-bold text-sm md:text-base banner-pulse">
+                SOLDES !!! -30% AVEC LE CODE : <span class="text-pink-600">BISOU30</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-12 md:top-16 left-1/2 transform -translate-x-1/2 z-40 navbar-glass rounded-full px-4 md:px-8 py-3 md:py-4 navbar-fade-in max-w-[95%] md:max-w-none">
+        <div class="flex items-center justify-between gap-4 md:gap-8 w-full">
+            <a href="index.html" class="font-display text-lg md:text-xl font-bold gradient-text">OnaPilate</a>
+            <div class="flex items-center gap-3 md:gap-6">
+                <a href="index.html" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Accueil</a>
+                <a href="produit.html" class="hidden md:block text-gray-700 hover:text-pink-500 transition-colors font-medium">Produit</a>
+                <a href="paiement.html" class="px-4 md:px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white text-sm md:text-base font-semibold hover:scale-105 transition-transform whitespace-nowrap">Acheter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-36">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-pink-200/30 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl animate-float delay-500"></div>
+        </div>
+        
+        <div class="relative z-10 container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-left animate-fade-in-up">
+                    <h1 class="font-display text-6xl md:text-8xl font-bold mb-6">
+                        <span class="gradient-text">OnaPilate</span>
+                    </h1>
+                    <p class="text-3xl md:text-4xl text-gray-800 mb-4 animate-fade-in-up delay-200">
+                        Votre Studio de Pilates à la Maison
+                    </p>
+                    <p class="text-lg md:text-xl text-gray-600 mb-12 animate-fade-in-up delay-300">
+                        Découvrez le Reformer qui transformera votre pratique du Pilates et votre bien-être quotidien
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 animate-scale-in delay-400">
+                        <a href="produit.html" class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-semibold text-lg hover:scale-110 transition-transform duration-300 animate-pulse-glow text-center">
+                            Découvrir le Reformer →
+                        </a>
+                        <a href="produit.html" class="px-8 py-4 glass-effect rounded-full text-gray-800 font-semibold text-lg hover:bg-pink-50 transition-all duration-300 border-2 border-pink-300 text-center">
+                            Voir le Produit
+                        </a>
+                    </div>
+                </div>
+                <div class="animate-scale-in delay-500">
+                    <img src="img/IMG_5559.jpg" alt="Reformer OnaPilate" class="rounded-3xl shadow-2xl w-full h-auto object-cover animate-float">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Pourquoi Nous Choisir -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class="font-display text-5xl md:text-6xl font-bold text-center mb-16 animate-fade-in-up">
+                <span class="gradient-text">Pourquoi Choisir OnaPilate ?</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-effect rounded-2xl p-8 hover:scale-105 transition-transform duration-300 animate-slide-in-left delay-200">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">Qualité Premium</h3>
+                    <p class="text-gray-600 text-center">Reformer professionnel conçu pour durer, avec des matériaux de première qualité et une finition impeccable.</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-8 hover:scale-105 transition-transform duration-300 animate-scale-in delay-400">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">Expertise Pilates</h3>
+                    <p class="text-gray-600 text-center">Conçu par des experts du Pilates pour offrir une expérience authentique de studio dans le confort de votre maison.</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-8 hover:scale-105 transition-transform duration-300 animate-slide-in-right delay-600">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">Bien-être Garanti</h3>
+                    <p class="text-gray-600 text-center">Transformez votre santé et votre bien-être avec un équipement qui s'adapte à tous les niveaux de pratique.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 animate-fade-in-up delay-700">
+                <a href="produit.html" class="inline-block px-10 py-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-xl hover:scale-110 transition-transform duration-300 animate-pulse-glow">
+                    Je Veux Mon Reformer Maintenant →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avantages Section -->
+    <section class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="font-display text-5xl md:text-6xl font-bold text-center mb-16 animate-fade-in-up">
+                <span class="gradient-text">Les Avantages d'un Reformer à la Maison</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div class="flex items-start gap-6 animate-slide-in-left delay-200">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">🏠</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Pratiquez Quand Vous Voulez</h3>
+                        <p class="text-gray-600">Plus besoin de réserver un créneau ou de vous déplacer. Votre studio est toujours disponible, 24h/24 et 7j/7.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-6 animate-slide-in-right delay-300">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">💰</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Économisez sur le Long Terme</h3>
+                        <p class="text-gray-600">Un investissement unique qui remplace les abonnements mensuels coûteux aux studios de Pilates.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-6 animate-slide-in-left delay-400">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">🔒</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Intimité et Confort</h3>
+                        <p class="text-gray-600">Pratiquez dans votre espace privé, sans jugement, à votre propre rythme et selon vos besoins.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-6 animate-slide-in-right delay-500">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">👨‍👩‍👧‍👦</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Partagez avec Votre Famille</h3>
+                        <p class="text-gray-600">Toute la famille peut profiter de votre Reformer, multipliant les bénéfices de votre investissement.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-6 animate-slide-in-left delay-600">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">📈</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Progression à Votre Rythme</h3>
+                        <p class="text-gray-600">Développez vos compétences progressivement, sans pression, avec un équipement qui grandit avec vous.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-6 animate-slide-in-right delay-700">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Résultats Visibles</h3>
+                        <p class="text-gray-600">Renforcez votre corps, améliorez votre posture et votre flexibilité avec une pratique régulière.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16 animate-scale-in delay-800">
+                <a href="produit.html" class="inline-block px-10 py-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-xl hover:scale-110 transition-transform duration-300 animate-pulse-glow">
+                    Commencer Ma Transformation →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-20 px-6 bg-gradient-to-br from-pink-50 via-purple-50 to-white relative overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-10 right-10 w-64 h-64 bg-pink-200/20 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-10 left-10 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl animate-float delay-500"></div>
+        </div>
+        
+        <div class="container mx-auto relative z-10">
+            <div class="text-center mb-16 animate-fade-in-up">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">Des Résultats Qui Parlent</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Rejoignez des milliers de personnes qui ont transformé leur bien-être avec OnaPilate
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-effect rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300 animate-scale-in delay-200">
+                    <div class="text-5xl md:text-6xl font-bold gradient-text mb-4">98%</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Clients Satisfaits</h3>
+                    <p class="text-gray-600 text-sm">Notre taux de satisfaction exceptionnel</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300 animate-scale-in delay-300">
+                    <div class="text-5xl md:text-6xl font-bold gradient-text mb-4">92%</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Résultats en 30 Jours</h3>
+                    <p class="text-gray-600 text-sm">Voyez des changements dès le premier mois</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300 animate-scale-in delay-400">
+                    <div class="text-5xl md:text-6xl font-bold gradient-text mb-4">15K+</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Utilisateurs Actifs</h3>
+                    <p class="text-gray-600 text-sm">Une communauté grandissante chaque jour</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300 animate-scale-in delay-500">
+                    <div class="text-5xl md:text-6xl font-bold gradient-text mb-4">4.9/5</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Note Moyenne</h3>
+                    <p class="text-gray-600 text-sm">Basée sur plus de 5000 avis clients</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center animate-fade-in-up delay-600">
+                <a href="produit.html" class="inline-block px-10 py-5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-xl hover:scale-110 transition-transform duration-300 animate-pulse-glow">
+                    Rejoindre la Communauté →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class="font-display text-5xl md:text-6xl font-bold text-center mb-16 animate-fade-in-up">
+                <span class="gradient-text">Découvrez Notre Reformer</span>
+            </h2>
+            
+            <!-- Carousel -->
+            <div class="relative max-w-5xl mx-auto">
+                <div id="galleryCarousel" class="carousel-container relative overflow-hidden rounded-2xl">
+                    <div id="gallerySlides" class="flex carousel-slide" style="transform: translateX(0%);">
+                        <div class="min-w-full">
+                            <img src="img/IMG_5560_d2276a45-f4d8-461e-947c-bc670d9a4ddf.jpg" alt="Reformer OnaPilate" class="rounded-2xl shadow-lg w-full h-80 md:h-96 object-cover">
+                        </div>
+                        <div class="min-w-full">
+                            <img src="img/IMG_5561.jpg" alt="Reformer OnaPilate" class="rounded-2xl shadow-lg w-full h-80 md:h-96 object-cover">
+                        </div>
+                        <div class="min-w-full">
+                            <img src="img/IMG_5563.jpg" alt="Reformer OnaPilate" class="rounded-2xl shadow-lg w-full h-80 md:h-96 object-cover">
+                        </div>
+                        <div class="min-w-full">
+                            <img src="img/pexels-cottonbro-4325439_430x.webp" alt="Reformer OnaPilate" class="rounded-2xl shadow-lg w-full h-80 md:h-96 object-cover">
+                        </div>
+                        <div class="min-w-full">
+                            <img src="img/Sans_titre_21_x_28_cm_430x.webp" alt="Reformer OnaPilate" class="rounded-2xl shadow-lg w-full h-80 md:h-96 object-cover">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button type="button" id="galleryPrev" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all hover:scale-110 z-20 cursor-pointer">
+                    <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <button type="button" id="galleryNext" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all hover:scale-110 z-20 cursor-pointer">
+                    <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+                
+                <!-- Dots Indicator -->
+                <div class="flex justify-center gap-2 mt-6">
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-pink-300 active" data-slide="0"></button>
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-pink-300" data-slide="1"></button>
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-pink-300" data-slide="2"></button>
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-pink-300" data-slide="3"></button>
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-pink-300" data-slide="4"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Subscription Section -->
+    <section class="py-16 px-6 bg-white relative overflow-hidden">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <!-- Left Side - Content -->
+                <div class="animate-slide-in-left delay-200">
+                    <div class="inline-block px-4 py-2 bg-pink-100 rounded-full mb-4">
+                        <span class="text-pink-600 font-semibold text-sm">🎁 Offre Exclusive</span>
+                    </div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+                        <span class="gradient-text">-10% Supplémentaire</span>
+                        <br>sur votre première commande
+                    </h2>
+                    <p class="text-gray-600 mb-6 text-lg">
+                        Inscrivez-vous pour recevoir nos actualités et un code promo exclusif. Le code vous sera envoyé par email.
+                    </p>
+                    
+                    <form id="emailSubscriptionForm" onsubmit="submitEmailSubscription(event)" class="space-y-3">
+                        <div class="flex gap-3">
+                            <input 
+                                type="email" 
+                                id="subscriptionEmail" 
+                                required
+                                placeholder="Entrez votre email" 
+                                class="flex-1 px-6 py-4 rounded-xl border-2 border-gray-200 focus:border-pink-400 focus:outline-none transition-all bg-gray-50"
+                            >
+                            <button 
+                                type="submit" 
+                                class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl text-white font-bold hover:scale-105 transition-transform duration-300 shadow-lg whitespace-nowrap"
+                            >
+                                Recevoir
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-400">
+                            En vous inscrivant, vous acceptez de recevoir nos offres exclusives
+                        </p>
+                    </form>
+                    
+                    <div id="subscriptionSuccess" class="hidden mt-4 animate-fade-in-up">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-xl">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-green-700 font-semibold text-sm">Code envoyé ! Vérifiez votre boîte mail</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Visual -->
+                <div class="relative animate-slide-in-right delay-300">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-pink-200 to-purple-200 rounded-3xl transform rotate-3 animate-float"></div>
+                        <div class="relative bg-white rounded-3xl p-8 shadow-2xl border-4 border-pink-100">
+                            <div class="text-center">
+                                <div class="w-24 h-24 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform -rotate-6">
+                                    <span class="text-5xl">📧</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="text-4xl font-bold gradient-text">-10%</div>
+                                    <div class="text-gray-600 font-semibold">Code Promo</div>
+                                    <div class="text-sm text-gray-500">Exclusif pour vous</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final Section -->
+    <section class="py-20 px-6 bg-gradient-to-br from-pink-50 via-purple-50 to-gray-50 relative overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-10 right-10 w-64 h-64 bg-pink-200/30 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-10 left-10 w-80 h-80 bg-purple-200/30 rounded-full blur-3xl animate-float delay-500"></div>
+        </div>
+        
+        <div class="container mx-auto max-w-4xl relative z-10">
+            <div class="glass-effect rounded-3xl p-10 md:p-12 text-center animate-scale-in delay-200">
+                <div class="inline-block px-4 py-2 bg-pink-100 rounded-full mb-6">
+                    <span class="text-pink-600 font-semibold text-sm">✨ Commencez Votre Transformation</span>
+                </div>
+                
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 animate-fade-in-up">
+                    <span class="gradient-text">Prêt à Transformer Votre Vie ?</span>
+                </h2>
+                
+                <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-200">
+                    Rejoignez des milliers de personnes qui ont choisi OnaPilate pour leur bien-être quotidien
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-scale-in delay-400">
+                    <a href="paiement.html" class="group px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-lg hover:scale-105 transition-all duration-300 shadow-lg flex items-center gap-2">
+                        <span>Acheter Maintenant</span>
+                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                    <a href="produit.html" class="px-8 py-4 glass-effect rounded-full text-gray-800 font-bold text-lg hover:bg-pink-50 transition-all duration-300 border-2 border-pink-300">
+                        Découvrir le Produit
+                    </a>
+                </div>
+                
+                <div class="mt-10 flex flex-wrap justify-center gap-6 text-gray-600 text-sm animate-fade-in-up delay-500">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Livraison gratuite</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Garantie 2 ans</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Retour gratuit</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Popup -->
+    <div id="emailPopup" class="fixed inset-0 z-50 popup-overlay hidden items-center justify-center p-4">
+        <div class="popup-content glass-effect rounded-3xl p-8 md:p-12 max-w-md w-full relative">
+            <!-- Close Button -->
+            <button onclick="closeEmailPopup()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <!-- Content -->
+            <div class="text-center">
+                <div class="w-20 h-20 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">
+                    <span class="gradient-text">-10% Supplémentaire !</span>
+                </h2>
+                
+                <p class="text-gray-600 mb-2 text-lg">
+                    Recevez un code promo exclusif de <span class="font-bold text-pink-600">-10%</span> supplémentaire
+                </p>
+                <p class="text-gray-500 text-sm mb-6">
+                    En plus de votre réduction actuelle, pour votre première commande
+                </p>
+                
+                <form id="emailForm" onsubmit="submitEmail(event)" class="space-y-4">
+                    <div>
+                        <input 
+                            type="email" 
+                            id="popupEmail" 
+                            required
+                            placeholder="Votre adresse email" 
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition-all text-center"
+                        >
+                    </div>
+                    
+                    <button 
+                        type="submit" 
+                        class="w-full px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-lg hover:scale-105 transition-transform duration-300 animate-pulse-glow"
+                    >
+                        Recevoir Mon Code Promo
+                    </button>
+                </form>
+                
+                <p class="text-xs text-gray-400 mt-4">
+                    En vous inscrivant, vous acceptez de recevoir nos offres exclusives
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-10 px-6 border-t border-gray-200 bg-white">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400">© 2024 OnaPilate. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Show banner and navbar after loader
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const banner = document.getElementById('promoBanner');
+                const navbar = document.getElementById('navbar');
+                if (banner) banner.style.display = 'block';
+                if (navbar) navbar.classList.add('show');
+            }, 2500);
+        });
+
+        // Navbar and banner scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const banner = document.getElementById('promoBanner');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                if (banner) banner.style.display = 'block';
+                if (navbar) navbar.classList.add('show');
+            }
+        });
+
+        // Gallery Carousel
+        let galleryCurrentSlide = 0;
+        const galleryTotalSlides = 5;
+        let galleryAutoSlideInterval;
+
+        function initGalleryCarousel() {
+            const gallerySlides = document.getElementById('gallerySlides');
+            const galleryNext = document.getElementById('galleryNext');
+            const galleryPrev = document.getElementById('galleryPrev');
+            const galleryDotsContainer = document.querySelector('#galleryCarousel').parentElement;
+            const galleryDots = galleryDotsContainer ? galleryDotsContainer.querySelectorAll('button[data-slide]') : [];
+
+            if (!gallerySlides) {
+                console.log('Gallery slides not found');
+                return;
+            }
+
+            function updateGalleryCarousel() {
+                if (gallerySlides) {
+                    gallerySlides.style.transform = `translateX(-${galleryCurrentSlide * 100}%)`;
+                }
+                galleryDots.forEach((dot, index) => {
+                    if (index === galleryCurrentSlide) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            function resetAutoSlide() {
+                clearInterval(galleryAutoSlideInterval);
+                galleryAutoSlideInterval = setInterval(() => {
+                    galleryCurrentSlide = (galleryCurrentSlide + 1) % galleryTotalSlides;
+                    updateGalleryCarousel();
+                }, 4000);
+            }
+
+            if (galleryNext) {
+                galleryNext.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    galleryCurrentSlide = (galleryCurrentSlide + 1) % galleryTotalSlides;
+                    updateGalleryCarousel();
+                    resetAutoSlide();
+                });
+            } else {
+                console.log('Gallery next button not found');
+            }
+
+            if (galleryPrev) {
+                galleryPrev.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    galleryCurrentSlide = (galleryCurrentSlide - 1 + galleryTotalSlides) % galleryTotalSlides;
+                    updateGalleryCarousel();
+                    resetAutoSlide();
+                });
+            } else {
+                console.log('Gallery prev button not found');
+            }
+
+            galleryDots.forEach((dot, index) => {
+                dot.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    galleryCurrentSlide = index;
+                    updateGalleryCarousel();
+                    resetAutoSlide();
+                });
+            });
+
+            // Auto slide
+            resetAutoSlide();
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initGalleryCarousel);
+        } else {
+            setTimeout(initGalleryCarousel, 100);
+        }
+
+        // Email Popup
+        let popupShown = false;
+        let scrollTriggered = false;
+
+        function showEmailPopup() {
+            // Vérifier si le popup a déjà été montré (localStorage)
+            if (localStorage.getItem('emailPopupShown') === 'true') {
+                return;
+            }
+
+            const popup = document.getElementById('emailPopup');
+            if (popup && !popupShown) {
+                popup.classList.remove('hidden');
+                popup.classList.add('flex');
+                popupShown = true;
+            }
+        }
+
+        function closeEmailPopup() {
+            const popup = document.getElementById('emailPopup');
+            if (popup) {
+                popup.classList.add('hidden');
+                popup.classList.remove('flex');
+            }
+        }
+
+        function submitEmail(event) {
+            event.preventDefault();
+            const email = document.getElementById('popupEmail').value;
+            
+            if (email) {
+                // Simuler l'envoi du code promo
+                const popup = document.getElementById('emailPopup');
+                const content = popup.querySelector('.popup-content');
+                
+                content.innerHTML = `
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h2 class="font-display text-3xl font-bold mb-4 text-gray-800">
+                            Code Envoyé ! 🎉
+                        </h2>
+                        <p class="text-gray-600 mb-4">
+                            Vérifiez votre boîte mail <span class="font-semibold">${email}</span>
+                        </p>
+                        <p class="text-gray-500 text-sm mb-6">
+                            Vous allez recevoir votre code promo <span class="font-bold text-pink-600">-10%</span> dans quelques instants
+                        </p>
+                        <button onclick="closeEmailPopup()" class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-bold text-lg hover:scale-105 transition-transform duration-300">
+                            Parfait, Merci !
+                        </button>
+                    </div>
+                `;
+                
+                // Sauvegarder dans localStorage
+                localStorage.setItem('emailPopupShown', 'true');
+                localStorage.setItem('userEmail', email);
+                
+                // Fermer après 3 secondes
+                setTimeout(() => {
+                    closeEmailPopup();
+                }, 3000);
+            }
+        }
+
+        // Afficher le popup au scroll
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            
+            // Afficher après avoir scrollé de 30% de la page
+            if (scrollPosition > windowHeight * 0.3 && !scrollTriggered && !popupShown) {
+                scrollTriggered = true;
+                // Délai de 1 seconde après le scroll
+                setTimeout(() => {
+                    showEmailPopup();
+                }, 1000);
+            }
+        });
+
+        // Fermer le popup en cliquant sur l'overlay
+        document.getElementById('emailPopup')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEmailPopup();
+            }
+        });
+
+        // Email Subscription Section
+        function submitEmailSubscription(event) {
+            event.preventDefault();
+            const email = document.getElementById('subscriptionEmail').value;
+            const form = document.getElementById('emailSubscriptionForm');
+            const successMessage = document.getElementById('subscriptionSuccess');
+            
+            if (email) {
+                // Sauvegarder dans localStorage
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('emailSubscription', 'true');
+                
+                // Afficher le message de succès
+                form.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+                
+                // Réinitialiser après 5 secondes
+                setTimeout(() => {
+                    form.classList.remove('hidden');
+                    successMessage.classList.add('hidden');
+                    document.getElementById('subscriptionEmail').value = '';
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>
